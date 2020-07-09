@@ -10,7 +10,10 @@
   "author": "Danilo Rodrigues Catapan <dcatapan@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^26.0.4",
     "@types/node": "^14.0.20",
+    "jest": "^26.1.0",
+    "ts-jest": "^26.1.1",
     "typescript": "^3.9.6"
   }
 }
