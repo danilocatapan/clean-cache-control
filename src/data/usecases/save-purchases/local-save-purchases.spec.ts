@@ -1,6 +1,7 @@
 import { CacheStore } from '@/data/protocols/cache'
 import { LocalSavePurchases } from '@/data/usecases/'
-import { SavePurchases } from '@/domain/usecases/save-purchases';
+import { SavePurchases } from '@/domain/usecases/';
+import { mockPurchases } from '@/data/tests';
 
 class CacheStoreSpy implements CacheStore {
   deleteKey = '';
@@ -29,15 +30,7 @@ class CacheStoreSpy implements CacheStore {
   }
 }
 
-const mockPurchases = (): Array<SavePurchases.Params> => [{
-  id: '1',
-  date: new Date(),
-  value: 50
-},{
-  id: '2',
-  date: new Date(),
-  value: 100
-}]
+
 
 type SutTypes = {
   sut: LocalSavePurchases
