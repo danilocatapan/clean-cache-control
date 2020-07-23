@@ -39,4 +39,27 @@ describe('LocalLoadPurchases', () => {
     expect(cacheStore.actions).toEqual([CacheStoreSpy.Action.fetch]);
     expect(cacheStore.fetchKey).toBe('purchases');
   });
+
+  test('Should delete cache if its expired', () => {
+    const currentDate = new Date();
+    const timestamp = getCacheExpirationDate(currentDate);
+    timestamp.setSeconds(timestamp.getSeconds() - 1);
+    const { cacheStore, sut } = makeSut(currentDate);
+    cacheStore.fetchResult = { timestamp };
+    sut.validate();
+    expect(cacheStore.actions).toEqual([CacheStoreSpy.Action.fetch, CacheStoreSpy.Action.delete]);
+    expect(cacheStore.fetchKey).toBe('purchases');
+    expect(cacheStore.deleteKey).toBe('purchases');
+  });
+
+  test('Should delete cache if its on expiration date', () => {
+    const currentDate = new Date();
+    const timestamp = getCacheExpirationDate(currentDate);
+    const { cacheStore, sut } = makeSut(currentDate);
+    cacheStore.fetchResult = { timestamp };
+    sut.validate();
+    expect(cacheStore.actions).toEqual([CacheStoreSpy.Action.fetch, CacheStoreSpy.Action.delete]);
+    expect(cacheStore.fetchKey).toBe('purchases');
+    expect(cacheStore.deleteKey).toBe('purchases');
+  });
 });
